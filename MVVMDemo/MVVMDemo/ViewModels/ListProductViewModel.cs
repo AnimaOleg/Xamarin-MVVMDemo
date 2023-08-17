@@ -1,38 +1,29 @@
 ﻿using System;
-using System.Windows.Input;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using Xamarin.Forms;
 using Prism.Mvvm; // BindableBase
 using MVVMDemo.Models;
-
-using Xamarin.Forms;
 
 namespace MVVMDemo.ViewModels
 {
     public class ListProductViewModel : BindableBase /*BaseViewModel*/
     {
         private ObservableCollection<Product> _products;
-
         public ObservableCollection<Product> Products
         {
-            /*get { return _products; }
-            set { SetProperty(ref _products, value); }*/
             get => _products;
             set => SetProperty(ref _products, value);
         }
-
         private Product _selectedProduct;
-
         public Product SelectedProduct
         {
-            /*get { return _selectedProduct; }
-            set { SetProperty(ref _selectedProduct, value); }*/
             get => _selectedProduct;
             set => SetProperty(ref _selectedProduct, value);
         }
 
         public ICommand GoToDetailsCommand { private set; get; }
-
         public INavigation Navigation { get; set; }
 
         public ListProductViewModel(INavigation navigation)
@@ -50,6 +41,7 @@ namespace MVVMDemo.ViewModels
 
         async Task GoToDetails(Type pageType)
         {
+            Console.WriteLine(SelectedProduct);
             if (SelectedProduct != null)
             {
                 var page = (Page)Activator.CreateInstance(pageType);

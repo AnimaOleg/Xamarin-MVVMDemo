@@ -14,7 +14,6 @@ namespace MVVMDemo.ViewModels
     public class ProductViewModel : BindableBase /*BaseViewModel*/
     {
         private string _name;
-
         public string Name
         {
             get { return _name; }
@@ -22,7 +21,6 @@ namespace MVVMDemo.ViewModels
         }
 
         private double _price;
-
         public double Price
         {
             get { return _price; }
@@ -30,7 +28,6 @@ namespace MVVMDemo.ViewModels
         }
 
         private bool _isAvailable;
-
         public bool IsAvailable
         {
             get { return _isAvailable; }
@@ -40,10 +37,13 @@ namespace MVVMDemo.ViewModels
         public ICommand ClearCommand { private set; get; }
         public DelegateCommand SendEmailCommand { private set; get; }
         public DelegateCommand GuardarCommand { private set; get; }
+
+
+
+        #region <GUARDAR + VOLVER ATRAS>
+
         //public DelegateCommand BorrarCommand { private set; get; }
-
         //public ICommand GoToListCommand { private set; get; }
-
         /*public INavigation Navigation { get; set; }
         public ProductViewModel(INavigation navigation)
         {
@@ -54,7 +54,6 @@ namespace MVVMDemo.ViewModels
             Navigation = navigation;
             GoToListCommand = new Command<Type>(async (pageType) => await GoToList(pageType, navigation));
         }
-
         async Task GoToList(Type pageType, INavigation navigation)
         {
             var page = (Page)Activator.CreateInstance(pageType);
@@ -71,7 +70,7 @@ namespace MVVMDemo.ViewModels
 
             //await Navigation.PushAsync(ListProductViewModel(navigation));
         }*/
-
+        #endregion 
 
 
         public ProductViewModel()
@@ -81,17 +80,13 @@ namespace MVVMDemo.ViewModels
             GuardarCommand = new DelegateCommand(Guardar);
         }
 
-
-
-
-
-
-
         void Guardar()
         {
             Console.WriteLine("Guardar: " + Name + " _ "  + Price);
         }
+        
         void Borrar() { Console.WriteLine("Borrado: " + Name + " _ " + Price); }
+        
         void Clear()
         {
             try
@@ -105,6 +100,7 @@ namespace MVVMDemo.ViewModels
                 Console.WriteLine("Error Clear: " + e);
             }
         }
+        
         async Task SendEmail()
         {
             try

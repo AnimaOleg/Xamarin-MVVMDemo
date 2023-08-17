@@ -11,6 +11,7 @@ namespace MVVMDemo.ViewModels
     {
     }*/
 
+    /*
     public class BaseViewModel : INotifyPropertyChanged
     {
         //public IDataStore<Note> DataStore => DependencyService.Get<IDataStore<Note>>();
@@ -53,6 +54,6 @@ namespace MVVMDemo.ViewModels
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
-    }
+    }*/
 }
 

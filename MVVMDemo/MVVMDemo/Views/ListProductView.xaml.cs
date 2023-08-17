@@ -9,7 +9,6 @@ namespace MVVMDemo.Views
         public ListProductView()
         {
             InitializeComponent();
-
             BindingContext = new ViewModels.ListProductViewModel(Navigation);
         }
     }

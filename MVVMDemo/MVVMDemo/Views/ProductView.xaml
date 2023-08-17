@@ -43,9 +43,11 @@
                     Command="{Binding ClearCommand}"/>
             <Button Grid.Row="3" Grid.Column="2" Text="Guardar"
                     Command="{Binding GuardarCommand}"/>
-            <Button Grid.Row="3" Grid.Column="3" Text="GoToList"
+            <!--<Button Grid.Row="3" Grid.Column="3" Text="GoToList"
                     Command="{Binding Path=GoToListCommand}"
-                    CommandParameter="{Binding}"/>
+                    CommandParameter="{Binding}"/>-->
+            <Button Grid.Row="3" Grid.Column="3" Text="GoToList"
+                    />
 
             <StackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Text="{Binding Name, StringFormat='Product Name: {0}'}"/>

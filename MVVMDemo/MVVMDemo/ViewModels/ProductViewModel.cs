@@ -5,6 +5,9 @@ using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Prism.Mvvm; // BindableBase
+using MVVMDemo.Models;
+using Prism.Commands;
+using Prism.Navigation.Xaml;
 
 namespace MVVMDemo.ViewModels
 {
@@ -15,7 +18,7 @@ namespace MVVMDemo.ViewModels
         public string Name
         {
             get { return _name; }
-            set { _name = value; /*OnPropertyChanged();*/ }
+            set { SetProperty(ref _name, value); }
         }
 
         private double _price;
@@ -23,7 +26,7 @@ namespace MVVMDemo.ViewModels
         public double Price
         {
             get { return _price; }
-            set { _price = value; /*OnPropertyChanged();*/ }
+            set { SetProperty(ref _price, value); }
         }
 
         private bool _isAvailable;
@@ -31,24 +34,64 @@ namespace MVVMDemo.ViewModels
         public bool IsAvailable
         {
             get { return _isAvailable; }
-            set { _isAvailable = value; /*OnPropertyChanged();*/ }
+            set { SetProperty(ref _isAvailable, value); }
         }
 
-        public ICommand AlertCommand { private set; get; }
         public ICommand ClearCommand { private set; get; }
-        public ICommand SendEmailCommand { private set; get; }
+        public DelegateCommand SendEmailCommand { private set; get; }
+        public DelegateCommand GuardarCommand { private set; get; }
+        //public DelegateCommand BorrarCommand { private set; get; }
+
+        //public ICommand GoToListCommand { private set; get; }
+
+        /*public INavigation Navigation { get; set; }
+        public ProductViewModel(INavigation navigation)
+        {
+            //ClearCommand = new Command(Clear);
+            //SendEmailCommand = new DelegateCommand(async () => await SendEmail());
+            //GuardarCommand = new DelegateCommand(Guardar);
+
+            Navigation = navigation;
+            GoToListCommand = new Command<Type>(async (pageType) => await GoToList(pageType, navigation));
+        }
+
+        async Task GoToList(Type pageType, INavigation navigation)
+        {
+            var page = (Page)Activator.CreateInstance(pageType);
+
+            page.BindingContext = new ListProductViewModel(navigation);
+            {
+                //IsAvailable = SelectedProduct.IsAvailable,
+                //Name = SelectedProduct.Name,
+                //Price = SelectedProduct.Price
+                //Products.Add
+
+                //_products
+            };
+
+            //await Navigation.PushAsync(ListProductViewModel(navigation));
+        }*/
+
+
 
         public ProductViewModel()
         {
-            AlertCommand = new Command(() => Alert());
-            ClearCommand = new Command(() => Clear());
-            SendEmailCommand = new Command(async () => await SendEmail());
+            ClearCommand = new Command(Clear);
+            SendEmailCommand = new DelegateCommand(async () => await SendEmail());
+            GuardarCommand = new DelegateCommand(Guardar);
         }
 
-       async void Alert()
-       {
-            Console.WriteLine("Alert " );
+
+
+
+
+
+
+        void Guardar()
+        {
+            Console.WriteLine("Guardar: " + Name + " _ "  + Price);
         }
+        void Borrar() { Console.WriteLine("Borrado: " + Name + " _ " + Price); }
         void Clear()
         {
             try
@@ -62,7 +105,6 @@ namespace MVVMDemo.ViewModels
                 Console.WriteLine("Error Clear: " + e);
             }
         }
-
         async Task SendEmail()
         {
             try

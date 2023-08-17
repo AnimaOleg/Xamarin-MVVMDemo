@@ -11,8 +11,6 @@ namespace MVVMDemo.ViewModels
     {
     }*/
 
-
-
     public class BaseViewModel : INotifyPropertyChanged
     {
         //public IDataStore<Note> DataStore => DependencyService.Get<IDataStore<Note>>();
